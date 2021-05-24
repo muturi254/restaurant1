@@ -1,6 +1,7 @@
 package com.example.restaurants.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -68,7 +69,7 @@ public class RestaurantActivity extends AppCompatActivity {
         // get intent content
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        // mLocationTextView.setText(location);
+        mLocationTextView.setText(location);
 
         YelpApi client = YelpClient.getClient();
         Call<YelpBusinessesSearchResponse> call = client.getRestaurants(location, "restaurant");
@@ -81,18 +82,12 @@ public class RestaurantActivity extends AppCompatActivity {
 
                     assert response.body() != null;
                     List<Business> restaurantsList = response.body().getBusinesses();
-                    String[] restaurants = new String[restaurantsList.size()];
-                    String[] categories = new String[restaurantsList.size()];
+                    restaurantListAdapter = new RestaurantListAdapter(RestaurantActivity.this, restaurantsList);
+                    mRecyclerView.setAdapter(restaurantListAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RestaurantActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasFixedSize(true);
 
-                    for(int i=0; i < restaurants.length; i++) {
-                        restaurants[i] = restaurantsList.get(i).getName();
-                    }
-                    for(int i=0; i < categories.length; i++) {
-                        Category category = restaurantsList.get(i).getCategories().get(0);
-                        categories[i] = category.getTitle();
-                    }
-
-                    restaurantListAdapter = new RestaurantListAdapter(RestaurantActivity.this, restaurants);
 
                     showRestaurants();
                 } else {
@@ -119,7 +114,7 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     private void showRestaurants() {
-        mListView.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
         mLocationTextView.setVisibility(View.VISIBLE);
     }
 
