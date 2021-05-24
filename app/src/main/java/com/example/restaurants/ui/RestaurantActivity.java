@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.restaurants.adapters.RestaurantListAdapter;
+import com.example.restaurants.constants.Constant;
 import com.example.restaurants.models.Business;
 import com.example.restaurants.models.Category;
 import com.example.restaurants.adapters.MyRestaurantAdapter;
@@ -36,7 +39,6 @@ public class RestaurantActivity extends AppCompatActivity {
     @BindView(R.id.locationTextView) TextView mLocationTextView;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
-
 
     private RestaurantListAdapter restaurantListAdapter;
 //    private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro",

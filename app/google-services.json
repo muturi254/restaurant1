@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "419845074355",
+    "firebase_url": "https://helloworld-fd9ac.firebaseio.com",
+    "project_id": "helloworld-fd9ac",
+    "storage_bucket": "helloworld-fd9ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419845074355:android:ff886b855d3eb8a95fafc6",
+        "android_client_info": {
+          "package_name": "com.example.restaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419845074355-pok5mk2pejkmr1a568sdb7qrga6m0h24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0gHeUxRgZqypKV4BRNFBZB5_rStMeqF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419845074355-pok5mk2pejkmr1a568sdb7qrga6m0h24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
