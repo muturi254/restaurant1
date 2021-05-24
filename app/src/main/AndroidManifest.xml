@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.restaurants">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Restaurants">
+        <activity android:name=".ui.RestaurantDetail"></activity>
         <activity android:name=".ui.RestaurantActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
