@@ -9,12 +9,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.restaurants.R;
+import com.example.restaurants.constants.Constant;
 import com.example.restaurants.models.Business;
 import com.example.restaurants.models.Category;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcel;
@@ -39,7 +44,7 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     @BindView(R.id.webTextView) TextView mWebsiteLabel;
     @BindView(R.id.phoneTextView) TextView mPhoneLabel;
     @BindView(R.id.addressTextView) TextView mAddressLabel;
-    @BindView(R.id.saveRestaurantButton) TextView mSaveRestaurantButton;
+    @BindView(R.id.saveRestaurantButton) Button mSaveRestaurantButton;
 
     private Business mRestaurant;
 
@@ -84,6 +89,7 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
+        mSaveRestaurantButton.setOnClickListener(this);
 
         return view;
 
@@ -96,13 +102,21 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
             startActivity(webIntent);
         }
         if(view == mPhoneLabel) {
-            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + mRestaurant.getPhone()));
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " +
+                    mRestaurant.getPhone()));
             startActivity(phoneIntent);
         }
         if(view == mAddressLabel) {
-            Intent locationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo: " + mRestaurant.getCoordinates().getLatitude()
+            Intent locationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo: " +
+                    mRestaurant.getCoordinates().getLatitude()
             + mRestaurant.getCoordinates().getLongitude() + "?q=(" + mRestaurant.getName() + ")"));
             startActivity(locationIntent);
+        }
+        if(view == mSaveRestaurantButton) {
+            DatabaseReference restaurantDatabaseReference = FirebaseDatabase.getInstance()
+                    .getReference(Constant.FIREBASE_CHILD_RESTAURANT);
+            restaurantDatabaseReference.push().setValue(mRestaurant);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
         }
     }
 }
